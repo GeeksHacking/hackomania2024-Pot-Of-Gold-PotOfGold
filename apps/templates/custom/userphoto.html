@@ -48,13 +48,25 @@
     </section>
 
     <!-- Sya Code -->
-
-    <section class="min-vh-100 mb-8" id="cameraSection">
+    <section class="min-vh-100 mb-8" id="categorySelection">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
             <span class="mask bg-gradient-dark opacity-6"></span>
+
         </div>
     </section>
 
+
+    
+    <!-- Sya Code -->
+    <section class="min-vh-100 mb-8" id="SubmitButton">
+        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
+            <span class="mask bg-gradient-dark opacity-6"></span>
+
+        </div>
+    </section>
+
+
+    
     {% include "includes/footer-fullscreen.html" %}
 
   </main>
@@ -66,6 +78,40 @@
   <!-- Specific JS goes HERE --> 
   {% block javascripts %}
   <script>
+
+function getAddress() {
+            // Check if the Geolocation API is supported by the browser
+            if (navigator.geolocation) {
+                // Get current position using Geolocation API
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var geocoder = new google.maps.Geocoder();
+                    var latlng = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Call the geocode method to get the address
+                    geocoder.geocode({ 'location': latlng }, function (results, status) {
+                        if (status === google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                // Display the address on the webpage
+                                console.log(results[0].formatted_address)
+                                var resultant_address =  results[0].formatted_address;
+                            } else {
+                                alert('No address found.');
+                            }
+                        } else {
+                            alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                }, function(error) {
+                    // Handle errors
+                    alert('Error getting current position: ' + error.message);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
 
 function captureSnapshot() {
         var video = document.getElementById('videoElement');
@@ -79,7 +125,7 @@ function captureSnapshot() {
         
         // Hide camera section
         document.getElementById('cameraSection').style.display = 'none';
-        document.getElementById('cameraSection').style.display = 'none';
+        document.getElementById('categorySelection').style.display = 'none';
 
         // You can perform any other action here after taking the snapshot
     }
@@ -94,12 +140,13 @@ function captureSnapshot() {
         });
 
 
-
-
     // Attach click event handler to snapshot button
-    document.getElementById('snapshotButton').addEventListener('click', captureSnapshot);
+    document.getElementById('snapshotButton').addEventListener('click', getAddress);
 
 
 
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw6T61Bh9aTdCNw4aXKNnXsaNsj1mSnHM&libraries=places"></script>
+
     {% endblock javascripts %}
+    
