@@ -2,6 +2,8 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+import uuid
+
 
 import json
 from datetime import datetime
@@ -28,6 +30,15 @@ from apps.authentication.util import verify_pass, generate_token
 
 # Bind API -> Auth BP
 api = Api(blueprint)
+
+
+# def generate_unique_id():
+#     unique_id = uuid.uuid4()
+#     unique_id = str(unique_id)[-3:]
+#     return unique_id
+#     # unique_id = str(uuid.uuid4())
+#     # return unique_id
+
 
 @blueprint.route('/')
 def route_default():

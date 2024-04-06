@@ -17,16 +17,6 @@
 
 {% block content %}
 
-  <div class="container position-sticky z-index-sticky top-1">
-    <div class="row">
-      <div class="col-12">
-
-        {% include "includes/navigation-fullscreen.html" %}
-
-      </div>
-    </div>
-  </div>
-
   <main class="main-content  mt-0">
     <section class="min-vh-100 mb-8">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
@@ -49,6 +39,7 @@
                                 <i class="fas fa-coins mr-2" style="font-size: 70px;"></i> <!-- Coin icon with increased size -->
                                 <span style="font-size: 70px;">100</span> <!-- Number of coins with increased size -->
                             </div>
+                            
                         </div>
                     </div>
                     <!-- Add more reward items as needed -->
@@ -58,37 +49,23 @@
                 <!-- Second container placed after the "Reward Page" text -->
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 4">
-                        </div>
+                        <div class="d-flex align-items-center">
+
+                            <div class="reward-item">
+                                <img src="{{ config.ASSETS_ROOT }}/img/bill.png" alt="Reward 4" style="width: 200px; height: auto;">
+                            </div>
+                            <div class="reward-item">
+                                <img src="{{ config.ASSETS_ROOT }}/img/bubble-tea.png" alt="Reward 5" style="width: 200px; height: auto;">
+                            </div>
+                            <div class="reward-item">
+                                <img src="{{ config.ASSETS_ROOT }}/img/electric-car.png" alt="Reward 6" style="width: 200px; height: auto;">
+                            </div>
+                            <div class="reward-item">
+                                <img src="{{ config.ASSETS_ROOT }}/img/love.png" alt="Reward 4" style="width: 200px; height: auto;">
+                            </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 5">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 6">
-                        </div>
-                    </div>
-                    <!-- Add more reward items as needed -->
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 4">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 5">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 6">
-                        </div>
+
                     </div>
                     <!-- Add more reward items as needed -->
                 </div>
