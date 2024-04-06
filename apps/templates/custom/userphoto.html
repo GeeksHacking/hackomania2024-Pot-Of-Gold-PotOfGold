@@ -147,6 +147,9 @@
                   </div>
                   <input type="hidden" id="base64_image" name="base64_image">
                   <button type="button" class="btn btn-primary" onclick="handleBackClick('boxContainer')">Back</button>
+
+                  <!-- Submit the phone number from the phoneNumber parameter in the URL-->
+                  <input type="hidden" name="phoneNumber" value="{{ request.args.get('phoneNumber') }}">
                   <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
                 </form>
               </div>

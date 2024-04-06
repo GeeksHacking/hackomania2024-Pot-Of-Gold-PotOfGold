@@ -57,9 +57,16 @@ def user_rewards():
 # User Page
 @blueprint.route('/userphoto')
 def picutre_page():
+    # Get the phoneNumber value from the URL
+    phone = request.args.get('phoneNumber')
+    # Insert a new row into the 'Users' table
+    new_user = Users(phone=phone, points=0)
+    db.session.add(new_user)
+    db.session.commit()
+
     return render_template('custom/userphoto.html')
 
-# Insert test data into 'Reports' Database
+# Insert Repoert Detail into Reports Table
 @blueprint.route('/insert', methods=['POST'])
 def insert():
     # Get the form data from the request
@@ -68,6 +75,7 @@ def insert():
     category = request.form.get('category')
     location = request.form.get('location')
     base64_image = request.form.get('base64_image')
+    phone = request.form.get('phoneNumber')
 
     # Create a new 'Reports' object
     new_report = Reports(
@@ -78,6 +86,7 @@ def insert():
         base64_image=base64_image,
         category=category,
         location=location,
+        phone=phone,
         status='Open'
     )
 
@@ -122,8 +131,13 @@ def pending_page():
 @blueprint.route('/admin/approved', methods=['POST'])
 def approved_page():
     id = request.form['id']
+    phone = request.form['phoneNumber']
     report = Reports.query.get(id)
     report.status = "Approved"
+    # Add 5 points to the user based on the phone number
+    user = Users.query.filter_by(phone=phone).first()
+    print(user.points)
+    user.points += 5
     db.session.commit()
     return redirect(url_for('authentication_blueprint.admin_page'))
     # return render_template('custom/review.html', report=report)

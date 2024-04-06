@@ -54,6 +54,7 @@
             </form>
             <form method="post" action="/admin/approved" style="display: inline-block;">
                 <input type="hidden" name="id" value="{{ report.id }}">
+                <input type="hidden" name="phoneNumber" value="{{ report.phone }}">
                 <button type="submit" class="btn btn-success btn-sm" style="width: 150px;">Approve</button>
             </form>
           </div>
