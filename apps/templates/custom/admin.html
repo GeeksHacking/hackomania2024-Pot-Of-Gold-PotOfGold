@@ -22,6 +22,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Image</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created At</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Updated At</th>
                                     <th class="text-secondary opacity-7"></th>
@@ -33,13 +34,16 @@
                                     <td>{{ report.title }}</td>
                                     <td>{{ report.description }}</td>
                                     <td class="align-middle text-center">
+                                        <img src="data:image/png;base64,{{ report.base64_image }}" class="avatar avatar-xl me-3" alt="Image placeholder">
+                                    </td>
+                                    <td class="align-middle text-center">
                                         <span class="text-secondary text-xs font-weight-bold">{{ report.created_at }}</p></span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-secondary text-xs font-weight-bold">{{ report.updated_at }}</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit report">
+                                        <a href="/review/edit/{{report.id}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit report">
                                             Edit
                                         </a>
                                     </td>

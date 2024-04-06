@@ -18,6 +18,9 @@ class Reports(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
     description = db.Column(db.String(255))
+    base64_image = db.Column(db.String(255))
+    category = db.Column(db.String(64))
+    location = db.Column(db.String(64))
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
