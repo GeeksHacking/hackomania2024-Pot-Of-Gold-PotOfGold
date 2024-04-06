@@ -22,6 +22,7 @@ from apps import db, login_manager
 from apps.authentication import blueprint
 from apps.authentication.forms import LoginForm, CreateAccountForm
 from apps.authentication.models import Users
+from apps.models import Reports
 
 from apps.authentication.util import verify_pass, generate_token
 
@@ -45,8 +46,29 @@ def login_github():
 
 # User Page
 @blueprint.route('/user')
-def sample_page():
+def user_page():
     return render_template('custom/user.html')
+
+# Insert test data into 'Reports' Database
+@blueprint.route('/insert')
+def insert():
+    # Insert data into the database
+    # Create a new 'Report' object
+    new_report = Reports(title='Test Report', description='This is a test report', created_at=datetime.now(), updated_at=datetime.now())
+    # Add the new object to the database
+    db.session.add(new_report)
+    # Commit the changes
+    db.session.commit()
+    # Return a message
+    return 'Data inserted into the database'
+
+# Admin Page
+@blueprint.route('/admin')
+def admin_page():
+
+    # create a new a 
+
+    return render_template('custom/admin.html')
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
