@@ -24,6 +24,7 @@ class Reports(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     status = db.Column(db.String(64))
+    phone = db.Column(db.String(64))
 
     def __repr__(self):
         return str(self.title)

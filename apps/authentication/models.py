@@ -17,9 +17,11 @@ class Users(db.Model, UserMixin):
     __tablename__ = 'Users'
 
     id            = db.Column(db.Integer, primary_key=True)
-    username      = db.Column(db.String(64), unique=True)
-    email         = db.Column(db.String(64), unique=True)
-    password      = db.Column(db.LargeBinary)
+    phone         = db.Column(db.Integer, unique=True)
+    points       = db.Column(db.Integer, default=0)
+    # username      = db.Column(db.String(64), unique=True)
+    # email         = db.Column(db.String(64), unique=True)
+    # password      = db.Column(db.LargeBinary)
 
     oauth_github  = db.Column(db.String(100), nullable=True)
 
@@ -49,8 +51,8 @@ def user_loader(id):
 
 @login_manager.request_loader
 def request_loader(request):
-    username = request.form.get('username')
-    user = Users.query.filter_by(username=username).first()
+    phone = request.form.get('phone')
+    user = Users.query.filter_by(phone=phone).first()
     return user if user else None
 
 class OAuth(OAuthConsumerMixin, db.Model):
