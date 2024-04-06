@@ -49,6 +49,10 @@ def login_github():
 def user_page():
     return render_template('custom/user.html')
 
+# User Page
+@blueprint.route('/userphoto')
+def picutre_page():
+    return render_template('custom/userphoto.html')
 # Insert test data into 'Reports' Database
 @blueprint.route('/insert')
 def insert():
