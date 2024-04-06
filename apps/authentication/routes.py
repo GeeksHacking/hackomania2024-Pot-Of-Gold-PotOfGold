@@ -49,6 +49,11 @@ def login_github():
 def user_page():
     return render_template('custom/user.html')
 
+# userRewards
+@blueprint.route('/userRewards')
+def user_rewards():
+    return render_template('custom/userRewards.html')
+
 # User Page
 @blueprint.route('/userphoto')
 def picutre_page():
