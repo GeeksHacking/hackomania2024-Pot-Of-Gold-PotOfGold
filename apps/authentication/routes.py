@@ -54,7 +54,7 @@ def user_page():
 def insert():
     # Insert data into the database
     # Create a new 'Report' object
-    new_report = Reports(title='Test Report', description='This is a test report', created_at=datetime.now(), updated_at=datetime.now())
+    new_report = Reports(title='Test Report 3', description='This is a test report 3', created_at=datetime.now(), updated_at=datetime.now())
     # Add the new object to the database
     db.session.add(new_report)
     # Commit the changes
@@ -65,10 +65,14 @@ def insert():
 # Admin Page
 @blueprint.route('/admin')
 def admin_page():
+    # Select every row from the 'Reports' table
+    reports = Reports.query.all()
 
-    # create a new a 
-
-    return render_template('custom/admin.html')
+    # Print for debugging
+    for report in reports:
+        print(report.title, report.description, report.created_at, report.updated_at)
+    
+    return render_template('custom/admin.html', reports=reports)
 
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():

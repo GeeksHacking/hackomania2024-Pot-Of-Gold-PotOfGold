@@ -47,7 +47,6 @@ class Users(db.Model, UserMixin):
 def user_loader(id):
     return Users.query.filter_by(id=id).first()
 
-
 @login_manager.request_loader
 def request_loader(request):
     username = request.form.get('username')
