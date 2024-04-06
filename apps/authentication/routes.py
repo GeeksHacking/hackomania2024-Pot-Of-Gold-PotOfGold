@@ -48,6 +48,11 @@ def login_github():
 def sample_page():
     return render_template('custom/user.html')
 
+# User Page
+@blueprint.route('/userphoto')
+def picutre_page():
+    return render_template('custom/userphoto.html')
+
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
