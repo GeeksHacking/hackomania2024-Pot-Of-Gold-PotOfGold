@@ -5,148 +5,257 @@
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
 <style>
-    #videoElement {
-        width: 70%;
-        height: auto;
-        top:100px;
-    }
-    #snapshotButton-container {
-        margin-top: 50px;
-    }
+  #videoElement {
+    width: 70%;
+    height: auto;
+    top: 100px;
+  }
+
+  #snapshotButton-container {
+    margin-top: 50px;
+  }
+
+  .box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .box {
+    flex: 0 0 30%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .box:hover {
+    background-color: #f5f5f5;
+  }
+
+  .box i {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  .text-box {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .text-box textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    margin-bottom: 10px;
+  }
+
+  .text-box button {
+    margin-right: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
 </style>
 {% endblock stylesheets %}
 
 {% block content %}
 
-  <div class="container position-sticky z-index-sticky top-1">
-    <div class="row">
-      <div class="col-12">
-
-        {% include "includes/navigation-fullscreen.html" %}
-
-      </div>
+<div class="container position-sticky z-index-sticky top-1">
+  <div class="row">
+    <div class="col-12">
+      {% include "includes/navigation-fullscreen.html" %}
     </div>
   </div>
+</div>
 
-  <main class="main-content  mt-0">
+<main class="main-content mt-0">
 
-    <section class="min-vh-100 mb-8" id="cameraSection">
-        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
-        <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-8 text-center mx-auto">
-                <div class="d-flex flex-column align-items-center">
-                    <h2 class="text-lead text-white">Camera Stream</h2>
-                    <video id="videoElement" autoplay></video>
-                    <button id="snapshotButton" class="btn btn-primary mt-3">Take Snapshot</button>
-                </div>
+  <section class="min-vh-100 mb-8" id="cameraSection">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+      style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto">
+            <div class="d-flex flex-column align-items-center">
+              <h2 class="text-lead text-white">Camera Stream</h2>
+              <video id="videoElement" autoplay></video>
+              <button id="snapshotButton" class="btn btn-primary mt-3">Take Snapshot</button>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Sya Code -->
-    <section class="min-vh-100 mb-8" id="categorySelection">
-        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-
+  <section class="min-vh-100 mb-8" id="categorySection" style="display: none;">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+      style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0">
+              <div class="card-header text-center pt-4">
+                <h5>Select Category</h5>
+              </div>
+              <div class="card-body">
+                <div id="boxContainer" class="box-container">
+                  <div class="box" onclick="handleBoxClick('Water')">
+                    <i class="fas fa-tint"></i>
+                    <h6>Water</h6>
+                  </div>
+                  <div class="box" onclick="handleBoxClick('Electricity')">
+                    <i class="fas fa-bolt"></i>
+                    <h6>Electricity</h6>
+                  </div>
+                  <div class="box" onclick="handleBoxClick('Others')">
+                    <i class="fas fa-ellipsis-h"></i>
+                    <h6>Others</h6>
+                  </div>
+                </div>
+                <div class="text-box" id="othersTextBox">
+                  <textarea placeholder="Enter your text here..."></textarea>
+                  <button class="btn btn-primary" onclick="handleBackClick('boxContainer')">Back</button>
+                  <button class="btn btn-success" onclick="handleSubmitClick()">Submit</button>
+                </div>
+                <form role="form text-left" id="categoryForm" style="display: none;">
+                  <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" class="form-control" id="category" name="category" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
+                  </div>
+                  <button type="button" class="btn btn-primary" onclick="handleBackClick('boxContainer')">Back</button>
+                  <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="handleBackClick('cameraSection')"
+      style="position: absolute; top: 20px; left: 20px;">Back to Camera</button>
+  </section>
 
+  {% include "includes/footer-fullscreen.html" %}
 
-    
-    <!-- Sya Code -->
-    <section class="min-vh-100 mb-8" id="SubmitButton">
-        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('{{ config.ASSETS_ROOT }}/img/curved-images/curved14.jpg');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
+</main>
 
-        </div>
-    </section>
-
-
-    
-    {% include "includes/footer-fullscreen.html" %}
-
-  </main>
+{% endblock content %}
 
 
 
-  {% endblock content %}
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script>
 
-  <!-- Specific JS goes HERE --> 
-  {% block javascripts %}
-  <script>
+  function getAddress() {
+    // Check if the Geolocation API is supported by the browser
+    if (navigator.geolocation) {
+      // Get current position using Geolocation API
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var geocoder = new google.maps.Geocoder();
+        var latlng = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
 
-function getAddress() {
-            // Check if the Geolocation API is supported by the browser
-            if (navigator.geolocation) {
-                // Get current position using Geolocation API
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var geocoder = new google.maps.Geocoder();
-                    var latlng = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    // Call the geocode method to get the address
-                    geocoder.geocode({ 'location': latlng }, function (results, status) {
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            if (results[0]) {
-                                // Display the address on the webpage
-                                console.log(results[0].formatted_address)
-                                var resultant_address =  results[0].formatted_address;
-                            } else {
-                                alert('No address found.');
-                            }
-                        } else {
-                            alert('Geocoder failed due to: ' + status);
-                        }
-                    });
-                }, function(error) {
-                    // Handle errors
-                    alert('Error getting current position: ' + error.message);
-                });
+        // Call the geocode method to get the address
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              // Display the address on the webpage
+              console.log(results[0].formatted_address)
+              var resultant_address = results[0].formatted_address;
             } else {
-                alert('Geolocation is not supported by this browser.');
+              alert('No address found.');
             }
-        }
-
-function captureSnapshot() {
-        var video = document.getElementById('videoElement');
-        var canvas = document.createElement('canvas');
-        var context = canvas.getContext('2d');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        // Convert canvas to data URL
-        var dataURL = canvas.toDataURL();
-        
-        // Hide camera section
-        document.getElementById('cameraSection').style.display = 'none';
-        document.getElementById('categorySelection').style.display = 'none';
-
-        // You can perform any other action here after taking the snapshot
-    }
-    // Accessing the camera stream
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-        .then(function(stream) {
-            var video = document.getElementById('videoElement');
-            video.srcObject = stream;
-        })
-        .catch(function(err) {
-            console.log("An error occurred: " + err);
+          } else {
+            alert('Geocoder failed due to: ' + status);
+          }
         });
+      }, function (error) {
+        // Handle errors
+        alert('Error getting current position: ' + error.message);
+      });
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  }
 
+  function captureSnapshot() {
+    var video = document.getElementById('videoElement');
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // Convert canvas to data URL
+    var dataURL = canvas.toDataURL();
 
-    // Attach click event handler to snapshot button
-    document.getElementById('snapshotButton').addEventListener('click', getAddress);
+    // Hide camera section and show category section
+    document.getElementById('cameraSection').style.display = 'none';
+    document.getElementById('categorySection').style.display = 'block';
+  }
 
+  // Accessing the camera stream
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    .then(function (stream) {
+      var video = document.getElementById('videoElement');
+      video.srcObject = stream;
+    })
+    .catch(function (err) {
+      console.log("An error occurred: " + err);
+    });
 
+  // Attach click event handler to snapshot button
+  document.getElementById('snapshotButton').addEventListener('click', captureSnapshot);
 
+  function handleBoxClick(userType) {
+    if (userType === 'Others') {
+      document.getElementById('boxContainer').style.display = 'none';
+      document.getElementById('othersTextBox').style.display = 'block';
+    } else {
+      document.getElementById('category').value = userType;
+      document.getElementById('boxContainer').style.display = 'none';
+      document.getElementById('categoryForm').style.display = 'block';
+    }
+  }
+
+  function handleBackClick(targetId) {
+    if (targetId === 'boxContainer') {
+      document.getElementById('othersTextBox').style.display = 'none';
+      document.getElementById('categoryForm').style.display = 'none';
+      document.getElementById('boxContainer').style.display = 'flex';
+    } else if (targetId === 'cameraSection') {
+      document.getElementById('categorySection').style.display = 'none';
+      document.getElementById('cameraSection').style.display = 'block';
+    }
+  }
+
+  function handleSubmitClick() {
+    var textBox = document.querySelector('#othersTextBox textarea');
+    var userInput = textBox.value;
+    document.getElementById('category').value = userInput;
+    textBox.value = ''; // Clear the text box
+    document.getElementById('othersTextBox').style.display = 'none';
+    document.getElementById('categoryForm').style.display = 'block';
+  }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw6T61Bh9aTdCNw4aXKNnXsaNsj1mSnHM&libraries=places"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw6T61Bh9aTdCNw4aXKNnXsaNsj1mSnHM&libraries=places"></script>
 
-    {% endblock javascripts %}
-    
+{% endblock javascripts %}
