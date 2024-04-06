@@ -3,7 +3,17 @@
 {% block title %} Sign UP {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+
+<style>
+
+    .reward-item {
+        margin-top: 25px; /* Add margin top to create an offset between Earth and reward items */
+    }
+
+</style>
+
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -28,25 +38,61 @@
                         <p class="text-lead text-white">Redeem these rewards with your points.</p>
                     </div>
                 </div>
-                <!-- Second container placed after the "Reward Page" text -->
-                <div class="row">
+                <div class="row justify-content-center mt-4">
                     <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 1">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 2">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="reward-item">
-                            <img src="https://via.placeholder.com/400x300" alt="Reward 3">
+                        <div class="d-flex align-items-center">
+                            <div class="Earth" style="margin-right: 50px;"> <!-- Increase margin for the Earth image -->
+                                <img src="{{ config.ASSETS_ROOT }}/img/Earth_image_new.png" alt="Earth">
+                            </div>
+                            <!-- Add coin icon and number with increased size -->
+                            <div class="d-flex align-items-center" style="margin-left: 40px;"> <!-- Increase margin for the coin icon/number -->
+                                <i class="fas fa-coins mr-2" style="font-size: 70px;"></i> <!-- Coin icon with increased size -->
+                                <span style="font-size: 70px;">100</span> <!-- Number of coins with increased size -->
+                            </div>
                         </div>
                     </div>
                     <!-- Add more reward items as needed -->
                 </div>
+                
+                
+                <!-- Second container placed after the "Reward Page" text -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 4">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 5">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 6">
+                        </div>
+                    </div>
+                    <!-- Add more reward items as needed -->
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 4">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 5">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="reward-item">
+                            <img src="https://via.placeholder.com/400x300" alt="Reward 6">
+                        </div>
+                    </div>
+                    <!-- Add more reward items as needed -->
+                </div>
+
             </div>
         </div>
     </section>
