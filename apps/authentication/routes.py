@@ -43,6 +43,11 @@ def login_github():
     res = github.get("/user")
     return redirect(url_for('home_blueprint.index'))
 
+# User Page
+@blueprint.route('/user')
+def sample_page():
+    return render_template('custom/user.html')
+
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
